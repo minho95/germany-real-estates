@@ -25,7 +25,7 @@ for city_key in cities:
     
     now = datetime.now()
 
-    dir_path = f'../data/flats' #{now.strftime("%d-%m-%Y-%H")}'
+    dir_path = f'../data/flats'
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
 

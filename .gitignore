@@ -1,0 +1,4 @@
+postgres-pipeline/config*
+web/client/node_modules
+__pycache__/
+estates-env
