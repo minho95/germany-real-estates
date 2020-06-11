@@ -32,4 +32,4 @@ union
 """
 
 def city_query(city):
-    return f"select * from flats where city = '{city}'"
+    return f"select * from flats where city = '{city}' order by price"

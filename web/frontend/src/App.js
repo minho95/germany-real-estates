@@ -59,7 +59,7 @@ class App extends React.Component {
             label: 'German flats',
             id: 'german flats'
           },
-          data: flatsToMapData(allFlats.slice(0, 100))
+          data: flatsToMapData(allFlats)
         },
         options: {
           centerMap: true,

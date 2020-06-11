@@ -5,7 +5,6 @@ from db.database import Database
 from db.models.Flat import Flat
 
 import os
-import itertools
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
