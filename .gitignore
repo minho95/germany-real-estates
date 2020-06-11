@@ -1,4 +1,6 @@
 postgres-pipeline/config*
 web/frontend/node_modules/
+web/server/config.py
 __pycache__/
 estates-env
+*.pyc

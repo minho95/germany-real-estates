@@ -2,8 +2,8 @@ import psycopg2
 
 class Database:
 
-    def __init__(self, config):
-        self.connection = psycopg2.connect(config['SQLALCHEMY_DATABASE_URI'])
+    def __init__(self, database_uri):
+        self.connection = psycopg2.connect(database_uri)
         self.cursor = self.connection.cursor()
         print("Connected to database")
 

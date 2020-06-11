@@ -55,19 +55,15 @@ class App extends React.Component {
     dispatch(
       addDataToMap({
         datasets: {
-          info: {
-            label: 'German flats',
-            id: 'german flats'
-          },
+          info: { label: 'German flats', id: 'german flats' },
           data: flatsToMapData(allFlats)
         },
         options: {
           centerMap: true,
           readOnly: true
-        },
-        config: {},
+        }
       })
-    );
+    )
     dispatch(fitBounds(config.coordsBound[this.state.currentCity]))
     this.setState({ mapInitialized: true })
   }
@@ -136,22 +132,18 @@ class App extends React.Component {
             ref={ (ref) => this.percentilesRef=ref }
           >
             <h3>Percentiles of prices by city</h3>
-            
             <PercentilesTable
               title="All flats"
               percentiles={percentiles.filter(q => q.rooms === 0)}
             />
-
             <PercentilesTable
               title="One bedroom flats"
               percentiles={percentiles.filter(q => q.rooms === 1)}
             />
-
             <PercentilesTable
               title="Two bedrooms flats"
               percentiles={percentiles.filter(q => q.rooms === 2)}
             />
-
             <PercentilesTable
               title="Three bedrooms flats"
               percentiles={percentiles.filter(q => q.rooms === 3)}

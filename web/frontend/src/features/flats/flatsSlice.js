@@ -35,7 +35,6 @@ export const loadFlats = (minLat, maxLat, minLong, maxLong) => dispatch => {
 }
 
 export const loadFlatsInCity = (city) => dispatch => {
-
   fetch(`http://localhost:5000/flats?city=${city}`)
     .then(res => res.json())
     .then(res => {

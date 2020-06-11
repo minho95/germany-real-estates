@@ -3,12 +3,12 @@ from flask import Flask, jsonify, request
 from flask_cors import cross_origin
 from db.database import Database
 from db.models.Flat import Flat
+import config
 
 import os
 
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
-db = Database(app.config)
+db = Database(config.DATABASE_URI)
 flat = Flat(db)
 
 @app.route('/')
