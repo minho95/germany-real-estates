@@ -16,6 +16,7 @@ class App extends React.Component {
     width: 1920,
     height: 1080,
     currentCity: config.defaultCity,
+    page: 1,
   }
 
 
@@ -69,16 +70,25 @@ class App extends React.Component {
   }
 
   changeCity(city) {
-    this.setState({ currentCity: city })
+    this.setState({ currentCity: city, page: 1 })
 
     this.props.dispatch(loadFlatsInCity(city))
+  }
+
+  changePage(page) {
+    console.log('change page: ', page)
+    this.setState({ page })
   }
  
   render() {
     const { all, percentiles } = this.props.flats
-    const { width, height } = this.state
+    const { width, height, page } = this.state
 
     if (!all || !all.length) return null
+
+    const flatsCount = all.length
+
+    let lastPage = Math.floor(flatsCount / 8) - (flatsCount % 8 == 0 ? 1 : 0)
 
     return (
       <div className="App">
@@ -104,7 +114,8 @@ class App extends React.Component {
                 ))
               }
             </div>
-            {all.map((flat, id) => (
+            {
+            all.slice((page - 1) * 8, page * 8).map((flat, id) => (
               <div key={`${flat.address}-${id}`} className="flats-panel-item">
                 <h3>{flat.address}</h3>
                 <span className="flats-panel-item-price">
@@ -115,7 +126,32 @@ class App extends React.Component {
                   <span>{flat.rooms} {flat.rooms >= 2 ? 'rooms' : 'room' }</span>
                 </div>
               </div>
-            ))}
+            ))
+            }
+            <div className="pagination">
+              <div
+                className={`pagination-item ${page == 1 ? 'active' : ''}`}
+                onClick={() => this.changePage(1)}
+              >
+                1
+              </div>
+              {
+                [page - 1, page, page + 1].filter(p => p > 1 && p < lastPage).map(p => (
+                  <div
+                    className={`pagination-item ${page == p ? 'active' : ''}`}
+                    onClick={() => this.changePage(p)}
+                  >
+                    {p}
+                  </div>  
+                ))
+              }
+              <div
+                className={`pagination-item ${page == lastPage ? 'active' : ''}`}
+                onClick={() => this.changePage(lastPage)}
+              >
+                {lastPage}
+              </div>
+            </div>
           </div>
           <button
             className="show-agg-button"
