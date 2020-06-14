@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template, send_from_directory
 
 from flask_cors import cross_origin
 from db.database import Database
@@ -7,13 +7,15 @@ import config
 
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="client/build/static", template_folder='client/build')
 db = Database(config.DATABASE_URI)
 flat = Flat(db)
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+def home():
+    #return "Hello World!"
+    #return send_from_directory(app.static_folder, 'index.html')
+    return render_template('index.html')
 
 @app.route('/flats')
 @cross_origin()
@@ -53,8 +55,8 @@ def get_percentiles():
             'percentile_75': row[5],
             'percentile_90': row[6]
         })
-
+    
     return jsonify(rows_list)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=os.environ.get("PORT", 5000))

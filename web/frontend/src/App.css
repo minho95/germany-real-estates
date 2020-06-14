@@ -81,18 +81,20 @@ button {
 }
 
 .flats-panel-item h3 {
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 0 5px;
 }
 
 .flats-panel-item-price {
   color: #13b17b;
+  width: 90px;
+  text-align: right;
 }
 
 .flats-panel-item-properties {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .pagination {

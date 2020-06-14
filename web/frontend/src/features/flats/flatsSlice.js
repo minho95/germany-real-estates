@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {ActionTypes} from 'kepler.gl/actions'
+import config from '../../config'
 
 export const flatsSlice = createSlice({
   name: 'flats',
@@ -26,8 +27,10 @@ export const flatsSlice = createSlice({
 
 export const { setFlats, setPercentiles, setUpdatedFlats } = flatsSlice.actions;
 
+const { apiUrl } = config
+
 export const loadFlats = (minLat, maxLat, minLong, maxLong) => dispatch => {
-  fetch(`http://localhost:5000/flats?minLat=${minLat}&maxLat=${maxLat}&minLong=${minLong}&maxLong=${maxLong}`)
+  fetch(`${apiUrl}/flats?minLat=${minLat}&maxLat=${maxLat}&minLong=${minLong}&maxLong=${maxLong}`)
     .then(res => res.json())
     .then(res => { 
       dispatch(setFlats(res))
@@ -35,7 +38,7 @@ export const loadFlats = (minLat, maxLat, minLong, maxLong) => dispatch => {
 }
 
 export const loadFlatsInCity = (city) => dispatch => {
-  fetch(`http://localhost:5000/flats?city=${city}`)
+  fetch(`${apiUrl}/flats?city=${city}`)
     .then(res => res.json())
     .then(res => {
       dispatch(setFlats(res))
@@ -43,7 +46,7 @@ export const loadFlatsInCity = (city) => dispatch => {
 }
 
 export const loadPercentiles = () => dispatch => {  
-  fetch(`http://localhost:5000/percentiles`)
+  fetch(`${apiUrl}/percentiles`)
     .then(res => res.json())
     .then(res => { dispatch(setPercentiles(res)) })
 }

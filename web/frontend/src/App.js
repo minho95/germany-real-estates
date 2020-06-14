@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import KeplerGl from 'kepler.gl';
 import { addDataToMap, fitBounds } from 'kepler.gl/actions';
-import { loadFlatsInCity, loadPercentiles, setUpdatedFlatsThunk } from './features/flats/flatsSlice'
+import { loadFlatsInCity, loadPercentiles } from './features/flats/flatsSlice'
 import { formatPrice } from './helpers/formatPrice'
 import { flatsToMapData } from './helpers/flatsToMapData'
 import PercentilesTable from './PercentilesTable'
@@ -76,7 +76,6 @@ class App extends React.Component {
   }
 
   changePage(page) {
-    console.log('change page: ', page)
     this.setState({ page })
   }
  
@@ -87,8 +86,8 @@ class App extends React.Component {
     if (!all || !all.length) return null
 
     const flatsCount = all.length
-
-    let lastPage = Math.floor(flatsCount / 8) - (flatsCount % 8 == 0 ? 1 : 0)
+    const { pageSize } = config
+    const lastPage = Math.floor(flatsCount / pageSize) - (flatsCount % pageSize === 0 ? 1 : 0)
 
     return (
       <div className="App">
@@ -115,12 +114,14 @@ class App extends React.Component {
               }
             </div>
             {
-            all.slice((page - 1) * 8, page * 8).map((flat, id) => (
+            all.slice((page - 1) * pageSize, page * pageSize).map((flat, id) => (
               <div key={`${flat.address}-${id}`} className="flats-panel-item">
+                <div className="flats-panel-item-properties">
                 <h3>{flat.address}</h3>
                 <span className="flats-panel-item-price">
                   <strong>{formatPrice(flat.price)}</strong>
                 </span>
+                </div>
                 <div className="flats-panel-item-properties">
                   <span>{flat.size} &#13217;</span>
                   <span>{flat.rooms} {flat.rooms >= 2 ? 'rooms' : 'room' }</span>
@@ -130,7 +131,7 @@ class App extends React.Component {
             }
             <div className="pagination">
               <div
-                className={`pagination-item ${page == 1 ? 'active' : ''}`}
+                className={`pagination-item ${page === 1 ? 'active' : ''}`}
                 onClick={() => this.changePage(1)}
               >
                 1
@@ -138,7 +139,7 @@ class App extends React.Component {
               {
                 [page - 1, page, page + 1].filter(p => p > 1 && p < lastPage).map(p => (
                   <div
-                    className={`pagination-item ${page == p ? 'active' : ''}`}
+                    className={`pagination-item ${page === p ? 'active' : ''}`}
                     onClick={() => this.changePage(p)}
                   >
                     {p}
@@ -146,7 +147,7 @@ class App extends React.Component {
                 ))
               }
               <div
-                className={`pagination-item ${page == lastPage ? 'active' : ''}`}
+                className={`pagination-item ${page === lastPage ? 'active' : ''}`}
                 onClick={() => this.changePage(lastPage)}
               >
                 {lastPage}

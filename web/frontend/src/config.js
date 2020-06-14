@@ -6,7 +6,9 @@ const config = {
         'berlin': [13, 52.520008, 13.7, 52.520008],
         'hamburg': [9.7, 53.4, 10.2, 53.8],
         'munich': [11.4, 48.137154, 11.7, 48.137154]
-    }
+    },
+    pageSize: 8,
+    apiUrl: 'https://young-mesa-35060.herokuapp.com/'
 }
 
 export default config

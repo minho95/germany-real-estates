@@ -1,1 +1,2 @@
-DATABASE_URI = "postgres://milan:local_postgres@localhost:5432/real-estates"
+#DATABASE_URI = "postgres://milan:local_postgres@localhost:5432/real-estates"
+DATABASE_URI = "postgres://teaygfpxtpxgrg:e1e891431da55a6d110a07982493651438df022b406dce2a3c38ea32c6a85d22@ec2-54-246-89-234.eu-west-1.compute.amazonaws.com:5432/dad2arntn0gc6e"
