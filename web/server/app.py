@@ -13,8 +13,6 @@ flat = Flat(db)
 
 @app.route('/')
 def home():
-    #return "Hello World!"
-    #return send_from_directory(app.static_folder, 'index.html')
     return render_template('index.html')
 
 @app.route('/flats')

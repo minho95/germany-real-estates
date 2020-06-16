@@ -8,7 +8,7 @@ const config = {
         'munich': [11.4, 48.137154, 11.7, 48.137154]
     },
     pageSize: 8,
-    apiUrl: 'https://young-mesa-35060.herokuapp.com/'
+    apiUrl: 'https://real-estates-web.herokuapp.com'
 }
 
 export default config
